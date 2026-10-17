@@ -1,0 +1,15 @@
+{
+  "name": "inbox-admission-control",
+  "description": "Inbox admission control: a daily Claude routine that keeps your Gmail inbox short with plain-English rules you approve",
+  "owner": {
+    "name": "Kilian Ciuffolo",
+    "url": "https://github.com/kilianc"
+  },
+  "plugins": [
+    {
+      "name": "inbox-admission-control",
+      "source": "./plugins/inbox-admission-control",
+      "description": "Set up a daily routine that triages your whole Gmail inbox, archives what your approved rules allow, proposes rules for the rest, unsubscribes you from senders you approve and emails you a recap."
+    }
+  ]
+}

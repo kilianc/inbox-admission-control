@@ -1,0 +1,23 @@
+# Allowlist: ignore everything, then admit source files only. This keeps
+# exported mail, sheet dumps and filled-in prompts out of a public repository.
+*
+
+!/.gitignore
+!/README.md
+!/LICENSE
+!/.claude-plugin/
+!/.claude-plugin/marketplace.json
+!/plugins/
+!/plugins/*/
+!/plugins/*/.claude-plugin/
+!/plugins/*/.claude-plugin/plugin.json
+!/plugins/*/skills/
+!/plugins/*/skills/*/
+!/plugins/*/skills/*/SKILL.md
+!/plugins/*/skills/*/routine.md
+!/plugins/*/skills/*/sheet/
+!/plugins/*/skills/*/sheet/tabs.md
+!/plugins/*/skills/*/sheet/*.csv
+
+# Claude Code worktrees live inside the checkout; they are not part of it.
+/.claude/
