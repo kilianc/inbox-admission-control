@@ -1,7 +1,7 @@
 {
   "name": "inbox-admission-control",
   "displayName": "Inbox admission control",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A daily Claude routine for Gmail: only mail that needs you stays in the inbox. It archives under labels by plain-English rules you approve in a Google Sheet, proposes rules for everything else, handles approved unsubscribes and emails you a recap. It never deletes mail.",
   "author": {
     "name": "Kilian Ciuffolo",

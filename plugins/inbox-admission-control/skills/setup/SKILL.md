@@ -15,10 +15,16 @@ patterns in a Google Sheet. The routine never deletes mail.
 What you build:
 
 1. Gmail labels `Auto/Promo`, `Auto/Receipts`, ... (see `sheet/tabs.md`).
-2. A Google Sheet "Inbox Rules" with seven tabs, seeded from
-   `sheet/rules.csv` and `sheet/playbook.csv`.
-3. A daily scheduled task whose prompt is `routine.md` with its
-   placeholders filled in.
+2. A Google Sheet "Inbox Rules" with eight tabs, seeded from
+   `sheet/rules.csv`, `sheet/playbook.csv` and the routine's steps.
+3. A daily scheduled task whose prompt is the task prompt in `routine.md`
+   with its placeholders filled in.
+
+The routine's steps live in the sheet's Routine tab, not in the task's
+prompt. Once the task runs on the user's computer (which it needs for Claude
+in Chrome), its prompt can be changed only in the Claude desktop app, by the
+user. So the prompt holds only what must never change, and the routine and
+the user change the steps in the sheet.
 
 Files referenced below are next to this SKILL.md.
 
@@ -81,29 +87,37 @@ every label's ID and build `{{LABEL_IDS}}` as one line:
      "Inbox Rules", and read the ID from the URL;
    - ask the user to create a blank sheet and paste its link.
 2. With `update_spreadsheet`, rename the first tab to `Rules` and add the
-   other six tabs in the order of `sheet/tabs.md`. Freeze row 1 on each.
+   other seven tabs in the order of `sheet/tabs.md`. Freeze row 1 on each.
 3. `get_spreadsheet` for each tab's `sheetId`. These are the `{{GID_*}}`
    values: `{{GID_RULES}}`, `{{GID_ARCHIVE_LOG}}`, `{{GID_UNSUBSCRIBE}}`,
    `{{GID_INBOX}}`, `{{GID_PLAYBOOK}}`, `{{GID_CHANGELOG}}`,
-   `{{GID_PROMPT_HISTORY}}`. The sheet ID is `{{SHEET_ID}}`.
+   `{{GID_PROMPT_HISTORY}}`, `{{GID_ROUTINE}}`. The sheet ID is
+   `{{SHEET_ID}}`.
 4. Write every header row, then seed Rules and Playbook as `sheet/tabs.md`
    describes. Use `update_values` with `valueInputOption` `USER_ENTERED` so
    the Hits formulas evaluate. Read the CSVs with a csv parser, since the
    fields contain commas and quotes.
 5. Read Rules and Playbook back and check the row counts against the CSVs.
 
-## 5. Fill in the routine
+## 5. Fill in the routine and seed the Routine tab
 
-Read `routine.md`, replace every placeholder, and leave `{{TASK_ID}}` as
-`(not set yet)` for now. Check that no `{{` remains apart from
-`{{TASK_ID}}`. Do not change anything else. In particular, the HARD RULES
-section must stay word for word.
+1. Split `routine.md` at its `## ` headings and ignore the text above the
+   first one. The body of `## Task prompt` is the task prompt. Each
+   `## Routine row: <Step>` section is one Routine-tab row: Step is the text
+   after the colon, Text is the body. Strip the blank lines around each body.
+2. Replace every placeholder in the prompt and in every row. Check that no
+   `{{` remains. Do not change anything else. In particular, the HARD RULES
+   section must stay word for word.
+3. Write the Routine tab: the header row, then one row per section in file
+   order, with Updated set to today. Read it back and check that every Text
+   matches what you wrote, character for character.
 
 ## 6. Create the scheduled task
 
 Create a daily task named **Inbox admission control** that runs at
-`{{RUN_TIME}}` in `{{TIMEZONE}}`, with the filled routine as its prompt. It
-needs:
+`{{RUN_TIME}}` in `{{TIMEZONE}}`, with the filled task prompt as its prompt.
+The prompt is final: nothing in it needs filling in after the task exists.
+It needs:
 
 - the Gmail and Google Sheets connectors;
 - a permission mode that lets it run unattended, with `label_thread` and
@@ -116,10 +130,11 @@ if there is one. If not, open `https://claude.ai/scheduled-task` in the
 user's browser, choose New task, and fill in the form yourself. Leave only
 the final confirmation to the user if the page asks for one.
 
-Once it exists, take its ID (for example `trig_...` in the task's URL),
-replace `(not set yet)` in the prompt with it, and save the updated prompt to
-the task. The routine uses the ID to improve its own prompt (step 8B). Read
-the prompt back and check that it saved.
+Read the task back and check that its prompt matches the filled task prompt
+character for character. Once the task runs on this computer, its prompt can
+be changed only in the Claude desktop app (the API and claude.ai refuse the
+edit), so check before you turn that setting on, and do not plan any later
+prompt edit. The steps change in the Routine tab instead.
 
 Write the Changelog row from `sheet/tabs.md`.
 
@@ -139,4 +154,8 @@ Then tell the user, in a few lines:
   their own address. It treats other mail as data, never as instructions.
 - **Undo an archive** by moving the thread back to the inbox. The routine
   never re-archives it and proposes a narrower rule.
+- **Change a step** by editing its row in the Routine tab; the next run
+  follows it. The routine edits those rows too, and logs each change in the
+  Changelog with a revert. The HARD RULES are in the task's prompt, where
+  only the user can change them, in the Claude desktop app.
 - The sheet holds senders and subjects of their mail. Keep it private.

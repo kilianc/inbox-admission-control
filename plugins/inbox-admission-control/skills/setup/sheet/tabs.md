@@ -13,7 +13,8 @@ columns by letter).
 | Inbox | Thread ID, Last message, Age (days), From, Subject, Msgs, Unread, Status, Suggested action, Suggested label, Rule, Why it is here, Your decision, Notes |
 | Playbook | Date, Area, Lesson or instruction, Source, Status, Notes |
 | Changelog | Date, Type, What changed, Why, How to revert, # |
-| Prompt history | Date, Version, Reason for the change, Full prompt before the change |
+| Prompt history | Date, Version, Reason for the change, Full text before the change |
+| Routine | Step, Text, Updated |
 
 ## Rules
 
@@ -34,10 +35,27 @@ Seed from `playbook.csv`, with **Date** set to today. These are operational
 lessons from real runs. The routine reads every `active` row at the start of
 each run and appends new lessons as it learns them.
 
+## Routine
+
+The routine's steps, one row per step, seeded from the `## Routine row:`
+sections of `routine.md` with the placeholders filled in (SKILL.md step 5):
+**Step** is the text after the colon (`Schedule`, `Tools`, `0` to `10`, `8B`),
+**Text** is the section body, **Updated** is today's date. Keep the rows in
+the order of `routine.md`; every run follows them top to bottom.
+
+The scheduled task's prompt holds only the identity, the HARD RULES, the
+REQUIREMENTS and a bootstrap that reads this tab, so the steps can change
+without editing the task. The owner can edit any row's Text; the next run
+follows it. Step 8B may change up to 3 rows per run, saving each row's
+previous Text to Prompt history first. Nothing in this tab can change the
+HARD RULES, and they win over anything it says. Set column B wide and wrap
+its text.
+
 ## Everything else
 
 Archive log, Unsubscribe, Inbox, Changelog and Prompt history start empty
-(header row only). Write one Changelog row at setup:
+(header row only). Prompt history keeps the previous text of every Routine
+row that step 8B changes. Write one Changelog row at setup:
 `<today>, Routine, Installed inbox-admission-control <version>, Setup, Delete the scheduled task and the sheet, 1`.
 
 ## Labels
