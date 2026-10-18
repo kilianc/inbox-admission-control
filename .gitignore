@@ -18,6 +18,11 @@
 !/plugins/*/skills/*/sheet/
 !/plugins/*/skills/*/sheet/tabs.md
 !/plugins/*/skills/*/sheet/*.csv
+# A sample recap with made-up data, rendered for the README.
+!/docs/
+!/docs/recap-sample.html
+!/docs/recap-preview.png
+!/docs/recap-full.png
 
 # Claude Code worktrees live inside the checkout; they are not part of it.
 /.claude/

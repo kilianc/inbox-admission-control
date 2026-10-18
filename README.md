@@ -6,6 +6,11 @@ a label once a rule you approved lets it go, and every run proposes rules for
 whatever is still sitting there. You decide in a Google Sheet, in plain
 English. The routine never deletes mail.
 
+<p align="center">
+  <img src="docs/recap-preview.png" width="600" alt="The top of a sample recap email: summary tiles, Needs you, Archived but check these, and a proposed rule with a link to review it in the sheet">
+</p>
+<p align="center"><sub>The daily recap, with made-up data. <a href="docs/recap-full.png">Full sample</a> · <a href="docs/recap-sample.html">HTML</a></sub></p>
+
 ## How it works
 
 Once a day the routine:
