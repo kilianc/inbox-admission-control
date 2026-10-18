@@ -69,7 +69,7 @@ task from an earlier install, ask whether to reuse it or start fresh.
 does not exist yet, creating `Auto` before its children, with the colors
 given. If the connector rejects a color, create the label without one. Record
 every label's ID and build `{{LABEL_IDS}}` as one line:
-`Auto/Promo=Label_12, Auto/Receipts=Label_13, ...` (all twelve child labels).
+`Auto/Promo=Label_12, Auto/Receipts=Label_13, ...` (every child label).
 
 ## 4. Create the sheet
 

@@ -37,22 +37,27 @@ proposes a narrower rule instead.
 
 ## The rulebook
 
-It starts with 16 rules, all **proposed**, so the first recap shows what each
-one would do before anything moves.
+It starts with a starter set, all **proposed**, so the first recap shows what
+each rule would do before anything moves. From then on the rulebook grows:
+every run proposes rules for mail the existing ones don't cover.
 
-- **R1 (KEEP)** defines what stays: open asks, people waiting on you, what you
-  need for the next 14 days, unopened mail from your doctor, and starred mail.
-- **R2–R15 (ARCHIVE)** name the kinds of mail that can go and pick their
-  labels: past events, promotions, receipts, bills that pay themselves,
-  shipping, codes you triggered, resolved or non-production alerts,
-  informational notices, finished or repeated asks, optional asks, old
-  recaps, finished conversations, recruiter outreach, and phishing that got
-  past the spam filter.
-- **R16** is the catch-all: whatever R1 doesn't keep goes after one recap.
-  Turn it off to run the other way round, where mail no rule names stays in
-  the inbox and gets a proposal instead.
+- **A KEEP rule** defines what stays: open asks, people waiting on you, what
+  you need for the next 14 days, unopened mail from your doctor, and starred
+  mail.
+- **ARCHIVE rules** name the kinds of mail that can go and pick their labels:
+  past events, promotions, receipts, bills that pay themselves, shipping,
+  codes you triggered, resolved or non-production alerts, informational
+  notices, finished or repeated asks, optional asks, old recaps, finished
+  conversations, recruiter outreach, and phishing that got past the spam
+  filter.
+- **The catch-all** archives whatever the KEEP rule doesn't keep, after one
+  recap. It is always checked last, wherever it sits in the sheet, and mail it
+  keeps catching turns into proposals for specific rules. Turn it off to run
+  the other way round, where mail no rule names stays in the inbox and gets a
+  proposal instead.
 
-Edit any rule's wording; the routine reads the text, not a query.
+Edit any rule's wording, or add your own; the routine reads the text, not a
+query.
 
 ## Hard rules
 
